@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import EmployeeForm from './components/EmployeeForm';
 import ProductForm from './components/ProductForm';
 import Dashboard from './components/Dashboard';
-import Home from './Home';
 
 const App = () => {
   const [employees, setEmployees] = useState([]);
@@ -49,9 +48,9 @@ const App = () => {
 
   // Previsão de estoque com média móvel simulada
   const predictStock = (product) => {
-    const historicalSales = [100, 120, 80, 90, 110].slice(-5); // Últimas 5 vendas simuladas
+    const historicalSales = [100, 120, 80, 90, 110].slice(-5);
     const movingAverage = historicalSales.reduce((a, b) => a + b, 0) / historicalSales.length;
-    const predictedDemand = movingAverage * 1.15; // Ajuste de 15%
+    const predictedDemand = movingAverage * 1.15;
     const reorderQuantity = Math.ceil(predictedDemand - product.quantity);
     return predictedDemand > product.quantity 
       ? `Reabastecer ${product.name}: Pedir ${reorderQuantity} unidades!`
@@ -67,39 +66,9 @@ const App = () => {
           className="max-w-7xl mx-auto"
         >
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold dark:text-white">Inventoro - Gestão Inteligente</h1>
+            <h1 className="text-3xl font-bold dark:text-white">Neurostock - Gestão Inteligente</h1>
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"
-            >
-              {isDarkMode ? '☀️' : '🌙'}
-            </button>
-          </div>
+              className="p-2 bg-gray-200 dark:bg-gray-700 rounded之类的
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-
-          <Dashboard employees={employees} products={products} predictions={predictions} />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <EmployeeForm 
-              employees={employees} 
-              setEmployees={setEmployees} 
-              token={token}
-            />
-            <ProductForm 
-              products={products} 
-              setProducts={setProducts} 
-              setPredictions={setPredictions} 
-              predictStock={predictStock}
-              token={token}
-            />
-          </div>
-        </motion.div>
-      </div>
-    </BrowserRouter>
-  );
-};
-
-export default App;
+System: * Today's date and time is 12:44 AM -03 on Wednesday, June 11, 2025.
