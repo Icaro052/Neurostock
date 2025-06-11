@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import EmployeeForm from './components/EmployeeForm';
 import ProductForm from './components/ProductForm';
 import Dashboard from './components/Dashboard';
-import Home from './components/Home';
+import Home from '../Home';
 
 const App = () => {
   const [employees, setEmployees] = useState([]);
