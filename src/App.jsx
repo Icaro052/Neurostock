@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import EmployeeForm from './components/EmployeeForm';
 import ProductForm from './components/ProductForm';
 import Dashboard from './components/Dashboard';
+import Home from './Home';
 
 const App = () => {
   const [employees, setEmployees] = useState([]);
@@ -57,40 +59,46 @@ const App = () => {
   };
 
   return (
-    <div className={`${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-100'} min-h-screen p-6 transition-colors duration-300`}>
-      <motion.div 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        className="max-w-7xl mx-auto"
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold dark:text-white">Inventoro - Gestão Inteligente</h1>
-          <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"
-          >
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
-        </div>
+    <BrowserRouter>
+      <div className={`${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-100'} min-h-screen p-6 transition-colors duration-300`}>
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          className="max-w-7xl mx-auto"
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold dark:text-white">Inventoro - Gestão Inteligente</h1>
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"
+            >
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
+          </div>
 
-        <Dashboard employees={employees} products={products} predictions={predictions} />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <EmployeeForm 
-            employees={employees} 
-            setEmployees={setEmployees} 
-            token={token}
-          />
-          <ProductForm 
-            products={products} 
-            setProducts={setProducts} 
-            setPredictions={setPredictions} 
-            predictStock={predictStock}
-            token={token}
-          />
-        </div>
-      </motion.div>
-    </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+
+          <Dashboard employees={employees} products={products} predictions={predictions} />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <EmployeeForm 
+              employees={employees} 
+              setEmployees={setEmployees} 
+              token={token}
+            />
+            <ProductForm 
+              products={products} 
+              setProducts={setProducts} 
+              setPredictions={setPredictions} 
+              predictStock={predictStock}
+              token={token}
+            />
+          </div>
+        </motion.div>
+      </div>
+    </BrowserRouter>
   );
 };
 
