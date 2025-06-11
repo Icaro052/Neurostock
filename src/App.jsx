@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import EmployeeForm from './components/EmployeeForm';
 import ProductForm from './components/ProductForm';
 import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 
 const App = () => {
   const [employees, setEmployees] = useState([]);
@@ -69,6 +70,28 @@ const App = () => {
             <h1 className="text-3xl font-bold dark:text-white">Neurostock - Gestão Inteligente</h1>
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="p-2 bg-gray-200 dark:bg-gray-700 rounded之类的
+              className="p-2 bg-gray-200 dark:bg-gray-700 rounded transition-colors"
+            >
+              {isDarkMode ? 'Modo Claro' : 'Modo Escuro'}
+            </button>
+          </div>
+          <nav className="mb-6 flex gap-4">
+            <Link to="/" className="text-blue-600 dark:text-blue-300 hover:underline">Início</Link>
+            <Link to="/dashboard" className="text-blue-600 dark:text-blue-300 hover:underline">Dashboard</Link>
+            <Link to="/product" className="text-blue-600 dark:text-blue-300 hover:underline">Produtos</Link>
+            <Link to="/employee" className="text-blue-600 dark:text-blue-300 hover:underline">Funcionários</Link>
+          </nav>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard employees={employees} products={products} predictions={predictions} />} />
+            <Route path="/product" element={<ProductForm />} />
+            <Route path="/employee" element={<EmployeeForm />} />
+            <Route path="*" element={<h2 className="text-red-500">Página não encontrada</h2>} />
+          </Routes>
+        </motion.div>
+      </div>
+    </BrowserRouter>
+  );
+};
 
-System: * Today's date and time is 12:44 AM -03 on Wednesday, June 11, 2025.
+export default App;
